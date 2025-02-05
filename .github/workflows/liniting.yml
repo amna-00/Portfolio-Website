@@ -1,0 +1,38 @@
+name: Html and CSS lint Pipeline
+
+on:
+    push:
+        branches:
+            - develop
+
+    pull_request:
+        branches:
+            - develop
+
+
+jobs:
+    linting_Job:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: build job
+              uses: actions/checkout@v4
+
+            - name: trigger for the job
+              run: echo "the job was triggered due to a ${{github.event_name}} event"
+
+            - name: installing htmlhint on runner
+              run: npm install --save-dev htmlhint
+
+            - name: installing stylelint on runner
+              run: npm install --save-dev stylelint
+
+            - name: running the htmlhint on runner
+              run: npx htmlhint "**/*.html"
+            
+            - name: running the stylelint on runner
+              run: npx stylelint "**/*.css"
+              
+        
+            
+             
